@@ -20,7 +20,12 @@ bg-image<template>
           <span class="text">{{seller.supports[0].description}}</span>
         </div>
       </div>
+      <div v-if="seller.supports" class="support-count">
+        <span class="count">{{seller.supports.length}}</span>
+        <i class="icon-keyboard_arrow_right"></i>
+      </div>
     </div>
+
     <div class="bulletin-wrapper"></div>
   </div>
 </template>
@@ -43,8 +48,9 @@ bg-image<template>
   @import "../../common/stylus/mixin.styl"
   .header
     color:#ffffff
-    background:#000000
+    background: #999
     .content-wrapper
+      position: relative
       padding:24px 12px 18px 24px
       font-size: 0
       .avatat
@@ -97,5 +103,25 @@ bg-image<template>
           .text
             display: inline-block
             line-height: 12px
-            font-size: 12px
+            font-size: 10px
+      .support-count
+        position: absolute
+        right: 12px
+        bottom: 14px
+        padding: 0 8px
+        height: 24px
+        line-height: 24px
+        border-radius: 14px
+        background: rgba(0, 0, 0, 0.2)
+        text-align: center
+        .count
+          vertical-align: top
+          font-size: 10px
+        .icon-keyboard_arrow_right
+          margin-left: 2px
+          line-height: 24px
+          font-size: 10px
+    .bulletin-wrapper
+      display: inline-block
+      height: 28px
 </style>
