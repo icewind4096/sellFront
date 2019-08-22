@@ -1,14 +1,18 @@
 import Vue from 'vue';
 import App from './App.vue';
 import VueRouter from 'vue-router';
+import VueResource from 'vue-resource';
 import seller from './components/seller/seller.vue';
 import goods from './components/goods/goods.vue';
 import ratings from './components/ratings/ratings.vue';
 
 import './common/stylus/index.styl';
 
-// 安装路由模块
+// 注册路由模块
 Vue.use(VueRouter);
+
+// 注册resource模块
+Vue.use(VueResource);
 
 // 路由器需要一个根组件
 var app = Vue.extend(App);

@@ -20,5 +20,7 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     //配置有分号
     'semi':['error', 'always'],
+    //忽略函数名和参数之间必须有空格
+    'space-before-function-paren': 0
   }
 }
