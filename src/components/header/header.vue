@@ -1,4 +1,4 @@
-bg-image<template>
+relativebg-image<template>
   <div class="header">
 
     <div class="content-wrapper">
@@ -30,6 +30,10 @@ bg-image<template>
       <span class="bulletin-title"></span><span class="bulletin-text">{{seller.bulletin}}</span>
       <i class="icon-keyboard_arrow_right"></i>
     </div>
+
+    <div class="background">
+      <img width="100%" height="100%" :src="seller.avatar">
+    </div>
   </div>
 </template>
 
@@ -50,8 +54,9 @@ bg-image<template>
 <style lang="stylus" rel="stylesheet/stylus">
   @import "../../common/stylus/mixin.styl"
   .header
-    color:#ffffff
-    background: #999
+    position: relative
+    color:#fff
+    background: rgba(7, 17, 27, 0.4)
     .content-wrapper
       position: relative
       padding:24px 12px 18px 24px
@@ -125,6 +130,7 @@ bg-image<template>
           line-height: 24px
           font-size: 10px
     .bulletin-wrapper
+      position: relative
       height: 28px
       line-height: 28px
       padding: 0 22px 0 12px
@@ -133,7 +139,6 @@ bg-image<template>
       text-overflow: ellipsis
       background: rgba(7, 17, 27, 0.2)
       .bulletin-title
-        position: relative
         display: inline-block
         vertical-align: top
         margin-top: 7px
@@ -151,4 +156,12 @@ bg-image<template>
         right: 12px
         top: 8px
         font-size: 10px
+    .background
+      position: absolute
+      top: 0
+      left: 0
+      width: 100%
+      height: 100%
+      z-index: -1
+      filter: blur(10px)
 </style>
