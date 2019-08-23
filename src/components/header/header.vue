@@ -20,19 +20,46 @@ relativebg-image<template>
           <span class="text">{{seller.supports[0].description}}</span>
         </div>
       </div>
-      <div v-if="seller.supports" class="support-count">
+      <div v-if="seller.supports" class="support-count" @click="showDetail">
         <span class="count">{{seller.supports.length}}</span>
         <i class="icon-keyboard_arrow_right"></i>
       </div>
     </div>
 
-    <div class="bulletin-wrapper">
+    <div class="bulletin-wrapper" @click="showDetail">
       <span class="bulletin-title"></span><span class="bulletin-text">{{seller.bulletin}}</span>
       <i class="icon-keyboard_arrow_right"></i>
     </div>
 
     <div class="background">
       <img width="100%" height="100%" :src="seller.avatar">
+    </div>
+
+    <div v-show="detailShow" class="detail">
+      <div class="detail-wrapper clearfix">
+        <div class="detail-main">
+          <p>{{seller.bulletin}}</p>
+          <p>{{seller.bulletin}}</p>
+          <p>{{seller.bulletin}}</p>
+          <p>{{seller.bulletin}}</p>
+          <p>{{seller.bulletin}}</p>
+          <p>{{seller.bulletin}}</p>
+          <p>{{seller.bulletin}}</p>
+          <p>{{seller.bulletin}}</p>
+          <p>{{seller.bulletin}}</p>
+          <p>{{seller.bulletin}}</p>
+          <p>{{seller.bulletin}}</p>
+          <p>{{seller.bulletin}}</p>
+          <p>{{seller.bulletin}}</p>
+          <p>{{seller.bulletin}}</p>
+          <p>{{seller.bulletin}}</p>
+          <p>{{seller.bulletin}}</p>
+          <p>{{seller.bulletin}}</p>
+        </div>
+      </div>
+      <div class="detail-close">
+        <i class="icon-close"></i>
+      </div>
     </div>
   </div>
 </template>
@@ -45,16 +72,28 @@ relativebg-image<template>
         type: Object
       }
     },
+    data() {
+      return {
+        detailShow: false
+      };
+    },
     created() {
       this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
+    },
+    methods: {
+      showDetail() {
+        this.detailShow = true;
+      }
     }
   };
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
   @import "../../common/stylus/mixin.styl"
+  @import "../../common/stylus/base.styl"
   .header
     position: relative
+    overflow: hidden
     color:#fff
     background: rgba(7, 17, 27, 0.4)
     .content-wrapper
@@ -141,7 +180,7 @@ relativebg-image<template>
       .bulletin-title
         display: inline-block
         vertical-align: top
-        margin-top: 7px
+        margin-top: 8px
         width: 22px
         height: 12px
         bg-image('bulletin')
@@ -164,4 +203,26 @@ relativebg-image<template>
       height: 100%
       z-index: -1
       filter: blur(10px)
+    .detail
+      position: fixed
+      z-index: 100
+      top: 0px
+      left : 0px
+      width: 100%
+      height: 100%
+      overflow: auto
+      background: rgba(7, 17, 27, 0.8)
+      .detail-wrapper
+        width: 100%
+        min-height: 100%
+        .detail-main
+          margin-top: 64px
+          padding-bottom: 64px
+      .detail-close
+        position: relative
+        width: 32px
+        height: 32px
+        margin: -64px auto 0 auto
+        clear: both
+        font-size: 32px
 </style>
