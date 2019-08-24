@@ -299,7 +299,7 @@
             .text
               display: inline-block
               line-height: 15px
-              font-size: 15px
+              font-size: 14px
           .bulletin
             width: 80%
             margin: 0 auto
