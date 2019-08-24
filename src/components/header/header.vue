@@ -1,4 +1,4 @@
-relativebg-image<template>
+<template>
   <div class="header">
 
     <div class="content-wrapper">
@@ -38,23 +38,10 @@ relativebg-image<template>
     <div v-show="detailShow" class="detail">
       <div class="detail-wrapper clearfix">
         <div class="detail-main">
-          <p>{{seller.bulletin}}</p>
-          <p>{{seller.bulletin}}</p>
-          <p>{{seller.bulletin}}</p>
-          <p>{{seller.bulletin}}</p>
-          <p>{{seller.bulletin}}</p>
-          <p>{{seller.bulletin}}</p>
-          <p>{{seller.bulletin}}</p>
-          <p>{{seller.bulletin}}</p>
-          <p>{{seller.bulletin}}</p>
-          <p>{{seller.bulletin}}</p>
-          <p>{{seller.bulletin}}</p>
-          <p>{{seller.bulletin}}</p>
-          <p>{{seller.bulletin}}</p>
-          <p>{{seller.bulletin}}</p>
-          <p>{{seller.bulletin}}</p>
-          <p>{{seller.bulletin}}</p>
-          <p>{{seller.bulletin}}</p>
+          <h1 class="name">{{seller.name}}</h1>
+          <div class="star-wrapper">
+            <star :size="48" :score="seller.score"></star>
+          </div>
         </div>
       </div>
       <div class="detail-close">
@@ -65,6 +52,8 @@ relativebg-image<template>
 </template>
 
 <script type="text/ecmascript-6">
+  import star from '../../components/star/star.vue';
+
   export default {
     name: 'header',
     props: {
@@ -84,6 +73,9 @@ relativebg-image<template>
       showDetail() {
         this.detailShow = true;
       }
+    },
+    components: {
+      star
     }
   };
 </script>
@@ -218,6 +210,15 @@ relativebg-image<template>
         .detail-main
           margin-top: 64px
           padding-bottom: 64px
+          .name
+            line-height: 16px
+            font-size: 16px
+            font-weight: 700
+            text-align: center
+          .star-wrapper
+            padding-bottom: 18px
+            padding: 2px 0
+            text-align: center
       .detail-close
         position: relative
         width: 32px
