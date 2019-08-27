@@ -9,7 +9,6 @@
         </li>
       </ul>
     </div>
-
     <div class="foods-wrapper" v-el:food-wrapper>
         <ul>
           <li v-for="item in goods" class="food-list food-list-hook">
@@ -34,10 +33,12 @@
           </li>
         </ul>
     </div>
+    <shop-cart></shop-cart>
   </div>
 </template>
 
 <script>
+  import shopCart from '../../components/shopcart/shopcart.vue';
   import BScroll from 'better-scroll';
 
   const ERR_OK = 0;
@@ -113,6 +114,9 @@
           this.listHeight.push(height);
         }
       }
+    },
+    components: {
+      'shopCart': shopCart
     }
   };
 </script>
