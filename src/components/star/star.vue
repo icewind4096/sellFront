@@ -31,7 +31,6 @@
           result[i] = CLS_OFF;
         }
 
-        console.log(this.score);
         var score = Math.floor(this.score * 2) / 2;
         var hasDecimal = score % 1 !== 0;
         var integer = Math.floor(score);
