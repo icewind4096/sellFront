@@ -22,6 +22,9 @@ npm run e2e
 
 # run all tests
 npm test
+
 ```
+#坑点
+1.注意要是保持驼峰命名，驼峰字母前面要加-,HTML不区分大小写这个是原因
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
