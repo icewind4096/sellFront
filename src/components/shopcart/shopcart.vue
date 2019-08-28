@@ -12,7 +12,7 @@
         </div>
 
         <div class="goodsAmount">
-            0元
+            {{totalPrice}}元
         </div>
 
         <div class="deliveryPrice">
@@ -20,7 +20,11 @@
         </div>
 
       </div>
-      <div class="content-right"></div>
+      <div class="content-right">
+        <div class="pay">
+          ￥{{minPrice}}元起送
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -36,6 +40,32 @@
       minPrice: {
         type: Number,
         default: 0
+      },
+      selectFoods: {
+        type: Array,
+        default() {
+          return [
+            {
+              price: 10, count: 20
+            }
+          ];
+        }
+      }
+    },
+    computed: {
+      totalPrice() {
+        let _totalAmount = 0;
+        this.selectFoods.forEach((item) => {
+          _totalAmount = _totalAmount + item.price * item.count;
+        });
+        return _totalAmount;
+      },
+      totalCount() {
+        let _totalCount = 0;
+        this.selectFoods.forEach((item) => {
+          _totalCount = _totalCount + item.count;
+        });
+        return _totalCount;
       }
     }
   };
@@ -53,6 +83,7 @@
       display: flex
       background: #141d27
       font-size: 0
+      color: rgba(255, 255, 255, 0.4)
       .content-left
         flex: 1
         .logo-wrapper
@@ -87,15 +118,20 @@
           border-right: 1px solid rgba(255, 255, 255, 0.1)
           font-size: 16px
           font-weight: 700
-          color: rgba(255, 255, 255, 0.4)
         .deliveryPrice
           display: inline-block
           vertical-align: top
           line-height: 24px
           margin: 12px 0 0 12px
-          color: rgba(255, 255, 255, 0.4)
           font-size: 10px
       .content-right
         flex: 0, 0, 105px
         width: 105px
+        .pay
+          height: 48px
+          line-height: 48px
+          text-align: center
+          font-size: 12px
+          font-weight: 700
+          background: #2b333b
 </style>
