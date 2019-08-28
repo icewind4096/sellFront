@@ -1,17 +1,24 @@
 <template>
   <div class="shopcart">
+
     <div class="content">
+
       <div class="content-left">
+
         <div class="logo-wrapper">
           <div class="logo">
             <i class="icon-shopping_cart"></i>
           </div>
         </div>
-        <div class="goodsAmount">
-        </div>
-        <div class="trafficAmount">
 
+        <div class="goodsAmount">
+            0元
         </div>
+
+        <div class="deliveryPrice">
+          另需配送费{{deliveryPrice}}元￥
+        </div>
+
       </div>
       <div class="content-right"></div>
     </div>
@@ -20,7 +27,17 @@
 
 <script type="text/ecmascript-6">
   export default {
-    name: 'shopCart'
+    name: 'shopCart',
+    props: {
+      deliveryPrice: {
+        type: Number,
+        default: 0
+      },
+      minPrice: {
+        type: Number,
+        default: 0
+      }
+    }
   };
 </script>
 
@@ -70,8 +87,14 @@
           border-right: 1px solid rgba(255, 255, 255, 0.1)
           font-size: 16px
           font-weight: 700
-        .trafficAmount
+          color: rgba(255, 255, 255, 0.4)
+        .deliveryPrice
           display: inline-block
+          vertical-align: top
+          line-height: 24px
+          margin: 12px 0 0 12px
+          color: rgba(255, 255, 255, 0.4)
+          font-size: 10px
       .content-right
         flex: 0, 0, 105px
         width: 105px

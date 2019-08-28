@@ -33,7 +33,7 @@
           </li>
         </ul>
     </div>
-    <shop-cart></shop-cart>
+    <shop-cart :delivery-Price="seller.deliveryPrice" :min-Price="seller.minPrice"></shop-cart>
   </div>
 </template>
 

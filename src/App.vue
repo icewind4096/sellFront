@@ -16,7 +16,7 @@
     </div>
   </div>
   <!-- 路由展示区 -->
-  <router-view></router-view>
+  <router-view :seller="seller"></router-view>
 </template>
 
 <script type="text/ecmascript-6">
