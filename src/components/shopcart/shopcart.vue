@@ -6,13 +6,14 @@
       <div class="content-left">
 
         <div class="logo-wrapper">
-          <div class="logo">
-            <i class="icon-shopping_cart"></i>
+          <div class="logo" :class="{'highLight':totalCount > 0}">
+            <i class="icon-shopping_cart" :class="{'highLight':totalCount>0}"></i>
           </div>
+          <div class="totalNumber" v-show="totalCount > 0">{{totalCount}}</div>
         </div>
 
-        <div class="goodsAmount">
-            {{totalPrice}}元
+        <div class="goodsAmount" :class="{'highLight':totalAmount > 0}">
+            {{totalAmount}}元
         </div>
 
         <div class="deliveryPrice">
@@ -21,8 +22,8 @@
 
       </div>
       <div class="content-right">
-        <div class="pay">
-          ￥{{minPrice}}元起送
+        <div class="pay" :class="payClass">
+          {{payDescript}}
         </div>
       </div>
     </div>
@@ -46,14 +47,14 @@
         default() {
           return [
             {
-              price: 10, count: 20
+              price: 10, count: 2
             }
           ];
         }
       }
     },
     computed: {
-      totalPrice() {
+      totalAmount() {
         let _totalAmount = 0;
         this.selectFoods.forEach((item) => {
           _totalAmount = _totalAmount + item.price * item.count;
@@ -66,6 +67,25 @@
           _totalCount = _totalCount + item.count;
         });
         return _totalCount;
+      },
+      payDescript() {
+        if (this.totalAmount === 0) {
+          return '￥' + this.minPrice + '元起送';
+        } else {
+          if (this.totalAmount < this.minPrice) {
+            const diff = this.minPrice - this.totalAmount;
+            return '还差￥' + diff + '元起送';
+          } else {
+            return '去结算';
+          }
+        }
+      },
+      payClass() {
+        if (this.totalAmount < this.minPrice) {
+          return 'not-enough';
+        } else {
+          return 'enough';
+        }
       }
     }
   };
@@ -104,10 +124,28 @@
             border-radius: 50%
             background: #2b343c
             text-align: center
+            &.highLight
+              background: rgb(0, 160, 220)
             .icon-shopping_cart
               line-height: 44px
               font-size: 24px
               color: #80858a
+              &.highLight
+                color: #fff
+          .totalNumber
+            position: absolute
+            top: 0;
+            right: 0;
+            width: 24px
+            height: 16px
+            line-height: 16px
+            text-align: center
+            border-radius: 16px
+            font-size: 9px
+            font-weight: 700
+            color: #fff
+            background: rgb(240, 20, 20)
+            box-shadow: 0 4px 8px 0 rgb(0, 0, 0, 0.4)
         .goodsAmount
           display: inline-block
           vertical-align: top
@@ -118,6 +156,8 @@
           border-right: 1px solid rgba(255, 255, 255, 0.1)
           font-size: 16px
           font-weight: 700
+          &.highLight
+            color: #fff
         .deliveryPrice
           display: inline-block
           vertical-align: top
@@ -133,5 +173,9 @@
           text-align: center
           font-size: 12px
           font-weight: 700
-          background: #2b333b
+          &.not-enough
+            background: #2b333b
+          &.enough
+            background: #00b43c
+            color: #fff
 </style>
