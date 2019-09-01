@@ -33,6 +33,7 @@
         } else {
           this.food.count = this.food.count + 1;
         }
+        this.$dispatch('cart.inc', event.target);
       },
       decCart(event) {
         if (!event._constructed) { return; } // 为了解决在PC端点击时触发两次 如果_constructed说明是原生的事件，不处理，直接返回
