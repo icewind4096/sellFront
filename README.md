@@ -43,7 +43,25 @@ npm test
 
 #CSS
 1. font-size: 0px 为了去掉元素之间的间隙
+
 2. padding: 有时候可以在元素不增大的基础上，增大操作区域
-   
+
+#动画
+当在VUE中与V-IF V-SHOW V-For一起使用时，才会触发动画效果
+
+1. 当V-SHOW触发时，会触发enter和leave两个事件
+
+2. 简单认为move-enter进入时效果，move-leave退出时效果
+
+#VUE访问子组件
+1. v-ref:xxx定义, 使用this.$refs.xxx来调用该元素的方法
+
+#VUE访问元素
+1. this.$els访问元素
+
+#小球动画 Q&A
+1.Q：为什么把balls设置为5  
+　A: 认为就算连续点击，最大在空中飞行的小球不会超过5个
+  
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
