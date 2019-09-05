@@ -140,15 +140,11 @@
               let x = rect.left - 32;
               let y = -(window.innerHeight - rect.top - 22);
               el.style.display = '';
-              el.style.webkitTransform = `translated3d(0, ${y}px, 0)`;
-              el.style.transaction = `translated3d(0, ${y}px, 0)`;
-              // el.style.webkitTransform = 'translated3d(0, -516px, 0)';
-              // el.style.transaction = 'translated3d(0, -516px, 0)';
+              el.style.webkitTransform = `translate3d(0, ${y}px, 0)`;
+              el.style.transform = `translate3d(0, ${y}px, 0)`;
               let inner = el.getElementsByClassName('inner-hook')[0];
-              // inner.style.webkitTransform = 'translated3d(289px, 0, 0)';
-              // inner.style.transaction = 'translated3d(289px, 0, 0)';
-              inner.style.webkitTransform = `translated3d(${x}px, 0, 0)`;
-              inner.style.transaction = `translated3d(${x}px, 0,  0)`;
+              inner.style.webkitTransform = `translate3d(${x}px, 0, 0)`;
+              inner.style.transform = `translate3d(${x}px, 0,  0)`;
             }
           }
         },
@@ -157,20 +153,19 @@
           let rf = el.offsetHeight;   // 手动触发浏览器刷新
           this.$nextTick(() => {
             el.style.display = '';
-            el.style.webkitTransform = 'translated3d(0, 0, 0)';
-            el.style.transaction = 'translated3d(0, 0, 0)';
+            el.style.webkitTransform = 'translate3d(0, 0, 0)';
+            el.style.transform = 'translate3d(0, 0, 0)';
             let inner = el.getElementsByClassName('inner-hook')[0];
-            inner.style.webkitTransform = 'translated3d(0, 0, 0)';
-            inner.style.transaction = 'translated3d(0, 0,  0)';
+            inner.style.webkitTransform = 'translate3d(0, 0, 0)';
+            inner.style.transform = 'translate3d(0, 0,  0)';
+            console.log('enter--');
           });
         },
         afterEnter(el) {
-          console.log('after enter');
           let ball = this.dropBalls.shift();
-          if (ball === true) {
+          if (ball.show === true) {
             ball.show = false;
             el.style.display = 'none';
-            console.log(el.style.display);
           }
         }
       }
@@ -272,11 +267,11 @@
         bottom: 22px
         z-index: 200
         &.drop-transition
-          transition: all 2s cubic-bezier(0.49, -0.29, 0.75, 0.41)
+          transition: all 0.4s cubic-bezier(0.49, -0.29, 0.75, 0.41)
           .inner
             width: 16px
             height: 16px
             border-radius: 50%                    //把一个矩形，变成一个圆形的小球
             background: rgb(0, 160, 220)
-            transition: all 2s linear
+            transition: all 0.4s linear
 </style>
