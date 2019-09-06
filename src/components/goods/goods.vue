@@ -134,14 +134,14 @@
         this.$refs.shopcart.drop(target);
       }
     },
-    components: {
-      'shopCart': shopCart,
-      'cartControl': cartControl
-    },
     events: {
       'cart.inc'(target) {
         this._drop(target);
       }
+    },
+    components: {
+      'shopCart': shopCart,
+      'cartControl': cartControl
     }
   };
 </script>

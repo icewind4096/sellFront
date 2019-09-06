@@ -1,7 +1,7 @@
 <template>
   <div class="shopcart">
 
-    <div class="content">
+    <div class="content" @click="showList">
 
       <div class="content-left">
 
@@ -33,10 +33,31 @@
         <div class="inner inner-hook"></div>
       </div>
     </div>
+
+    <div class="shopcart-list" v-show="listShow" transition="fold">
+      <div class="list-header">
+        <h1 class="title">购物车</h1>
+        <span class="clear">清空</span>
+      </div>
+      <div class="list-content" v-el:list-content>
+        <ul class="food" v-for="food in selectFoods">
+          <span class="name">{{food.name}}</span>
+          <div class="price">
+            <span>￥{{food.price*food.count}}</span>
+          </div>
+          <div class="cartcontrol-wrapper">
+            <cart-control :food="food"></cart-control>
+          </div>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  import cartControl from '../../components/cartControl/cartcontrol.vue';
+  import BScroll from 'better-scroll';
+
   export default {
     name: 'shopCart',
     props: {
@@ -78,10 +99,29 @@
             show: false
           }
         ],
-        dropBalls: []
+        dropBalls: [],
+        fold: true
       };
     },
     computed: {
+      listShow() {
+        if (this.totalCount === 0) {
+          this.fold = true;
+          return !this.fold;
+        }
+        if (this.fold === false) {
+          this.$nextTick(() => {
+            if (!this.scroll) {
+              this.scroll = new BScroll(this.$els.listContent, {
+                click: true
+              });
+            } else {
+              this.scroll.refresh();
+            }
+          });
+        }
+        return !this.fold;
+      },
       totalAmount() {
         let _totalAmount = 0;
         this.selectFoods.forEach((item) => {
@@ -127,6 +167,12 @@
             break;
           }
         }
+      },
+      showList() {
+        if (this.totalCount === 0) {
+          return;
+        }
+        this.fold = !this.fold;
       }
     },
     transitions: {
@@ -169,11 +215,16 @@
           }
         }
       }
+    },
+    components: {
+      'cartControl': cartControl
     }
   };
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
+  @import "../../common/stylus/mixin.styl"
+
   .shopcart
     position: fixed
     left: 0
@@ -274,4 +325,55 @@
             border-radius: 50%                    //把一个矩形，变成一个圆形的小球
             background: rgb(0, 160, 220)
             transition: all 0.4s linear
+    .shopcart-list
+      position: absolute
+      top: 0
+      left: 0
+      width: 100%
+      z-index: -1
+      &.fold-transition
+        transition: all 0.4s
+        transform: translate3d(0, -100%, 0)     //动画结束位置
+      &.fold-enter, &.fold-leave
+        transform: translate3d(0, 0, 0)
+      .list-header
+        height: 40px
+        line-height: 40px
+        padding: 0 18px
+        background: #f3f5f7
+        border-bottom: 1px solid rgba(7, 17, 27, 0.1)
+        .title
+          float: left
+          font-size: 14px
+          color: rgb(7, 17, 27);
+        .clear
+          float: right
+          font-size: 12px
+          color: rgb(0, 160, 220);
+      .list-content
+        padding: 0 18px
+        max-height: 217px
+        background: #fff
+        overflow: hidden
+        .food
+          position: relative
+          padding: 12px 0
+          box-sizing: border-box
+          border-1px(rgba(7, 17, 27, 0.1))
+          .name
+            line-height: 24px
+            font-size: 14px
+            color: rgb(7, 17, 27);
+          .price
+            position: absolute
+            right: 90px
+            bottom: 12px
+            line-height: 24px
+            font-size: 14px
+            font-weight: 700
+            color: rgb(240, 20, 20)
+          .cartcontrol-wrapper
+            position: absolute
+            right: 0
+            bottom: 6px
 </style>
