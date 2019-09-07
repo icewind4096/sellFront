@@ -102,7 +102,6 @@
     },
     methods: {
       selectMenu(index, event) {
-        console.log(event._constructed);
         if (!event._constructed) { return; } // 为了解决在PC端点击时触发两次 如果_constructed说明是原生的事件，不处理，直接返回
         var foodList = this.$els.foodWrapper.getElementsByClassName('food-list-hook');
         this.foodsScroll.scrollToElement(foodList[index], 300);

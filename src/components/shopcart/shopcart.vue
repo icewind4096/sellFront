@@ -1,9 +1,9 @@
 <template>
   <div class="shopcart">
 
-    <div class="content" @click="showList">
+    <div class="content">
 
-      <div class="content-left">
+      <div class="content-left" @click="toggleList">
 
         <div class="logo-wrapper">
           <div class="logo" :class="{'highLight':totalCount > 0}">
@@ -21,7 +21,8 @@
         </div>
 
       </div>
-      <div class="content-right">
+
+      <div class="content-right" @click="pay">
         <div class="pay" :class="payClass">
           {{payDescript}}
         </div>
@@ -37,26 +38,30 @@
     <div class="shopcart-list" v-show="listShow" transition="fold">
       <div class="list-header">
         <h1 class="title">购物车</h1>
-        <span class="clear">清空</span>
+        <span class="clear" @click="clearAll">清空</span>
       </div>
       <div class="list-content" v-el:list-content>
-        <ul class="food" v-for="food in selectFoods">
-          <span class="name">{{food.name}}</span>
-          <div class="price">
-            <span>￥{{food.price*food.count}}</span>
-          </div>
-          <div class="cartcontrol-wrapper">
-            <cart-control :food="food"></cart-control>
-          </div>
+        <ul>
+          <li  class="food" v-for="food in selectFoods">
+            <span class="name">{{food.name}}</span>
+            <div class="price">
+              <span>￥{{food.price*food.count}}</span>
+            </div>
+            <div class="cartcontrol-wrapper">
+              <cart-control :food="food"></cart-control>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
   </div>
+
+  <div class="list-mask" v-show="listShow" transition="mask" @click="hideList"></div>
 </template>
 
 <script type="text/ecmascript-6">
-  import cartControl from '../../components/cartControl/cartcontrol.vue';
   import BScroll from 'better-scroll';
+  import cartControl from '../../components/cartControl/cartcontrol.vue';
 
   export default {
     name: 'shopCart',
@@ -109,7 +114,7 @@
           this.fold = true;
           return !this.fold;
         }
-        if (this.fold === false) {
+        if (!this.fold === true) {
           this.$nextTick(() => {
             if (!this.scroll) {
               this.scroll = new BScroll(this.$els.listContent, {
@@ -168,11 +173,24 @@
           }
         }
       },
-      showList() {
+      toggleList() {
         if (this.totalCount === 0) {
           return;
         }
         this.fold = !this.fold;
+      },
+      clearAll() {
+        this.selectFoods.forEach((food) => {
+          food.count = 0;
+        });
+      },
+      hideList() {
+        this.fold = true;
+      },
+      pay() {
+        if (this.totalAmount > this.minPrice) {
+          window.alert('去支付' + this.totalAmount + '元');
+        }
       }
     },
     transitions: {
@@ -204,7 +222,6 @@
             let inner = el.getElementsByClassName('inner-hook')[0];
             inner.style.webkitTransform = 'translate3d(0, 0, 0)';
             inner.style.transform = 'translate3d(0, 0,  0)';
-            console.log('enter--');
           });
         },
         afterEnter(el) {
@@ -376,4 +393,19 @@
             position: absolute
             right: 0
             bottom: 6px
+  .list-mask
+    position: fixed
+    left: 0
+    top: 0
+    width: 100%
+    height: 100%
+    z-index: 40
+    backdrop-filter: blur(10px)
+    &.mask-transition
+      opacity: 1
+      background: rgba(7, 17, 27, 0.6)
+      transition: all 0.5s
+    &.mask-enter, &.mask-leave
+      opacity: 0
+      background: rgba(7, 17, 27, 0)
 </style>
