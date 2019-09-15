@@ -47,11 +47,21 @@ npm test
 2. padding: 有时候可以在元素不增大的基础上，增大操作区域
 
 #动画
-当在VUE中与V-IF V-SHOW V-For一起使用时，才会触发动画效果
+##当在VUE中与V-IF V-SHOW V-For一起使用时，才会触发动画效果
 
 1. 当V-SHOW触发时，会触发enter和leave两个事件
 
 2. 简单认为move-enter进入时效果，move-leave退出时效果
+
+##实现动画的基本步骤
+1. 在div中定义transition="xxx"
+2. 在css中加入&.xxx_transition, 表示动画最终状态
+      transition: all 0.4s linear //全部移动，0.4秒，线性移动
+      transform: translate3d(0, 0, 0) //最终移动到X->0 Y->0 Z->0
+3. 在css中加入&.xxx_enter, 表示动画进入位置
+4. 在css中加入&.xxx_leave, 表示动画离开位置
+
+      
 
 #VUE访问子组件
 1. v-ref:xxx定义, 使用this.$refs.xxx来调用该元素的方法
@@ -63,5 +73,8 @@ npm test
 1.Q：为什么把balls设置为5  
 　A: 认为就算连续点击，最大在空中飞行的小球不会超过5个
   
+#CSS小技巧
+1. 为了让加载图片时，不出现伸缩，padding-top为100%，此时高度以width为基准进行计算
+
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

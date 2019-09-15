@@ -14,7 +14,7 @@
           <li v-for="item in goods" class="food-list food-list-hook">
             <h1 class="title">{{item.name}}</h1>
             <ul>
-              <li v-for="food in item.foods" class="food-item border-1px">
+              <li v-for="food in item.foods" class="food-item border-1px" @click="selectFood(food, $event)">
                 <div class="icon">
                   <img width="57" height="57" :src="food.icon">
                 </div>
@@ -37,12 +37,14 @@
         </ul>
     </div>
     <shop-cart v-ref:shopcart :select-foods="selectFoods" :delivery-Price="seller.deliveryPrice" :min-Price="seller.minPrice"></shop-cart>
+    <food v-ref:food :food="selectedFood"></food>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import shopCart from '../../components/shopcart/shopcart.vue';
   import cartControl from '../../components/cartControl/cartcontrol.vue';
+  import food from '../../components/food/food.vue';
   import BScroll from 'better-scroll';
 
   const ERR_OK = 0;
@@ -58,7 +60,8 @@
       return {
         goods: [],
         listHeight: [],
-        scrollY: 0
+        scrollY: 0,
+        selectedFood: {}
       };
     },
     computed: {
@@ -101,8 +104,13 @@
       this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
     },
     methods: {
+      selectFood(food, event) {
+        if (!event._constructed) { return; }
+        this.selectedFood = food;
+        this.$refs.food.show();
+      },
       selectMenu(index, event) {
-        if (!event._constructed) { return; } // 为了解决在PC端点击时触发两次 如果_constructed说明是原生的事件，不处理，直接返回
+        if (!event._constructed) { return; }
         var foodList = this.$els.foodWrapper.getElementsByClassName('food-list-hook');
         this.foodsScroll.scrollToElement(foodList[index], 300);
       },
@@ -140,7 +148,8 @@
     },
     components: {
       'shopCart': shopCart,
-      'cartControl': cartControl
+      'cartControl': cartControl,
+      'food': food
     }
   };
 </script>
