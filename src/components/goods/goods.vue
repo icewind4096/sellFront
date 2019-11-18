@@ -1,4 +1,4 @@
-<template>
+selectFoods<template>
   <div class="goods">
     <div class="menu-wrapper" v-el:menu-wrapper>
       <ul>

@@ -1,6 +1,6 @@
 <template>
   <div class="cartcontrol">
-    <div class="cart-decrease" v-show="food.count > 0" @click="decCart" transition="move">
+    <div class="cart-decrease" v-show="food.count > 0" @click.stop.prevent="decCart" transition="move">
       <span class="inner icon-remove_circle_outline"></span>   <!-- 内层负责平移 -->
     </div>
 
@@ -8,7 +8,7 @@
       {{food.count}}
     </div>
 
-    <div class="cart-increase icon-add_circle" @click="incCart">
+    <div class="cart-increase icon-add_circle" @click.stop.prevent="incCart">
 
     </div>
   </div>

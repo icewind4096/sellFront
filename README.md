@@ -21,18 +21,18 @@ npm run unit
 npm run e2e
 
 # run all tests
-npm test
+npm testfrom '../../components/cartControl/cartcontrol.vue';
 
 ```
 #坑点
-1.注意要是保持驼峰命名，驼峰字母前面要加-,HTML不区分大小写这个是原因
+1.注意要是保持驼峰命名，驼峰大写字母前面要加-,HTML不区分大小写这个是原因
 
 2.为了解决在PC端点击时触发两次, 使用event._constructed,如果_constructed说明是原生的事件，不处理，直接返回
 
 #使用组件的顺序
 1.import组件
   import 组件变量名 from 组件文件路径
-  Ps. import cartControl from '../../components/cartControl/cartcontrol.vue';
+  Ps. import cartControl 
 
 2.注册组件
   components: {
@@ -75,6 +75,14 @@ npm test
   
 #CSS小技巧
 1. 为了让加载图片时，不出现伸缩，padding-top为100%，此时高度以width为基准进行计算
+
+#使用better-scroll组件
+1. 应用组件库
+   
+   import BScroll from 'better-scroll'
+   
+#防止click冒泡
+1. 使用click.stop.prevent
 
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
