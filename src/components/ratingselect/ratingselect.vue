@@ -1,11 +1,11 @@
 <template>
     <div class="ratingselect">
       <div class="rating-type border-1px">
-        <span class="block positive" :class="{'active':selectType === 2}">{{desc.all}}<span class="count">47</span></span>
-        <span class="block positive" :class="{'active':selectType === 0}">{{desc.positive}}<span class="count">57</span></span>
-        <span class="block negative" :class="{'active':selectType === 1}">{{desc.negative}}<span class="count">67</span></span>
+        <span class="block positive" @click="select(2, $event)" :class="{'active':selectType === 2}">{{desc.all}}<span class="count">{{ratings.length}}</span></span>
+        <span class="block positive" @click="select(0, $event)" :class="{'active':selectType === 0}">{{desc.positive}}<span class="count">{{positives.length}}</span></span>
+        <span class="block negative" @click="select(1, $event)" :class="{'active':selectType === 1}">{{desc.negative}}<span class="count">{{negatives.length}}</span></span>
       </div>
-      <div class="switch" :class="{'on':onlyContent === true}">
+      <div class="switch" @click="toggleContent" :class="{'on':onlyContent === true}">
         <span class="icon-check_circle"></span>
         <span class="text">只看有内容的评价</span>
       </div>
@@ -13,8 +13,8 @@
 </template>
 
 <script type="text/ecmascript-6">
-  // const POSITIVE = 0;
-  // const NEGATIVE = 1;
+  const POSITIVE = 0;
+  const NEGATIVE = 1;
   const ALL = 2;
 
   export default {
@@ -43,6 +43,31 @@
             negative: '不满意'
           };
         }
+      }
+    },
+    computed: {
+      positives() {
+        return this.ratings.filter((rating) => {
+          return rating.rateType === POSITIVE;
+        });
+      },
+      negatives() {
+        return this.ratings.filter((rating) => {
+          return rating.rateType === NEGATIVE;
+        });
+      }
+    },
+    methods: {
+      select(type, event) {
+        if (!event._constructed) { return; }
+        this.selectType = type;
+        // 派发事件给父组件
+        this.dispatch('ratingtype,select', this.selectType);
+      },
+      toggleContent(event) {
+        if (!event._constructed) { return; }
+        this.onlyContent = !this.onlyContent;
+        this.dispatch('ratingtype,onlyContent', this.onlyContent);
       }
     }
   };
