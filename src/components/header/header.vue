@@ -3,7 +3,7 @@
 
     <div class="content-wrapper">
 
-      <div class="avatat">
+      <div class="avatar">
         <img width="64" height="64" :src="seller.avatar">
       </div>
 
@@ -122,7 +122,7 @@
       position: relative
       padding:24px 12px 18px 24px
       font-size: 0
-      .avatat
+      .avatar
         display: inline-block
         vertical-align: top
         img
