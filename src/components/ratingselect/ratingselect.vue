@@ -5,7 +5,7 @@
         <span class="block positive" @click="select(0, $event)" :class="{'active':selectType === 0}">{{desc.positive}}<span class="count">{{positives.length}}</span></span>
         <span class="block negative" @click="select(1, $event)" :class="{'active':selectType === 1}">{{desc.negative}}<span class="count">{{negatives.length}}</span></span>
       </div>
-      <div class="switch" @click="toggleContent" :class="{'on':onlyContent === true}">
+      <div class="switch" @click="toggleContent" :class="{'on':onlyContent}">
         <span class="icon-check_circle"></span>
         <span class="text">只看有内容的评价</span>
       </div>
@@ -62,12 +62,12 @@
         if (!event._constructed) { return; }
         this.selectType = type;
         // 派发事件给父组件
-        this.dispatch('ratingtype,select', this.selectType);
+        this.$dispatch('ratingtype.select', this.selectType);
       },
       toggleContent(event) {
         if (!event._constructed) { return; }
         this.onlyContent = !this.onlyContent;
-        this.dispatch('ratingtype,onlyContent', this.onlyContent);
+        this.$dispatch('ratingtype.onlyContent', this.onlyContent);
       }
     }
   };

@@ -61,8 +61,6 @@ npm testfrom '../../components/cartControl/cartcontrol.vue';
 3. 在css中加入&.xxx_enter, 表示动画进入位置
 4. 在css中加入&.xxx_leave, 表示动画离开位置
 
-      
-
 #VUE访问子组件
 1. v-ref:xxx定义, 使用this.$refs.xxx来调用该元素的方法
 
@@ -84,5 +82,21 @@ npm testfrom '../../components/cartControl/cartcontrol.vue';
 #防止click冒泡
 1. 使用click.stop.prevent
 
+#组件消息
+1. 分发消息
+    this.$dispatch('消息名', 参数);
+2. 拦截消息
+    events{
+    '消息名'(参数) {
+    }
+   }
 
+#filter
+如果需要特殊显示，可以使用filter
+1. 定义过滤器
+    | 过滤器名称
+2. 拦截过滤器
+    filters: {
+        过滤器名称
+    }
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
