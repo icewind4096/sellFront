@@ -32,4 +32,4 @@ vueRouter.map({
 vueRouter.start(app, '#app');
 
 // 跳转到某一个页面
-vueRouter.go('/goods');
+// vueRouter.go('/goods');
