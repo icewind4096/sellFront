@@ -32,7 +32,7 @@
       <split></split>
       <div class="bulletin">
         <h1 class="title">公告与活动</h1>
-        <div class="content-wrapper border-1px">
+        <div class="content-wrapper">
           <p class="content">{{seller.bulletin}}</p>
         </div>
         <ul v-if="seller.supports" class="supports">
@@ -43,6 +43,10 @@
             </div>
           </li>
         </ul>
+      </div>
+      <split></split>
+      <div class="pics">
+
       </div>
     </div>
   </div>
@@ -141,7 +145,7 @@
         color: rgb(7, 17, 27)
       .content-wrapper
         padding: 0 12px 16px 12px
-        border-1px: 1px solid rgba(7, 17, 27, 0.1)
+        border-1px(rgba(7, 17, 27, 0.1))
         .content
           line-height: 24px
           font-size: 12px
@@ -152,7 +156,9 @@
         .support-item
           padding: 16px 12px
           font-size: 0
-          border-1px: 10px solid rgba(7, 17, 27, 0.1)
+          border-1px(rgba(7, 17, 27, 0.1))
+          &:last-child
+            border-none()
           .icon
             display: inline-block
             height: 16px
