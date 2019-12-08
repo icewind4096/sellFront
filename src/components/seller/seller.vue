@@ -67,8 +67,16 @@
     created() {
       this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
     },
+    watch: {
+      'seller'() {
+        this._initScroll();
+      }
+    },
     ready() {
-      this.$nextTick(() => {
+      this._initScroll();
+    },
+    methods: {
+      _initScroll() {
         if (!this.scroll) {
           this.scroll = new BScroll(this.$els.seller, {
             click: true
@@ -76,7 +84,7 @@
         } else {
           this.scroll.refresh();
         }
-      });
+      }
     },
     components: {
       'star': star,

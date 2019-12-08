@@ -129,5 +129,8 @@ npm testfrom '../../components/cartControl/cartcontrol.vue';
     filters: {
         过滤器名称
     }
-   ``` 
+   ```
+#watch
+1. 用于观察变量状态变化   
+    
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
