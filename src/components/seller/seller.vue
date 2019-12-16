@@ -46,7 +46,14 @@
       </div>
       <split></split>
       <div class="pics">
-
+        <h1 class="title">商家实景</h1>
+        <div class="pic-wrapper" v-el:pic-Wrapper>
+          <ul class="pic-list" v-el:pic-list>
+            <li class="pic-item" v-for="pic in seller.pics">
+              <img :src="pic" width="120" height="90">
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -70,10 +77,12 @@
     watch: {
       'seller'() {
         this._initScroll();
+        this._initPicsScroll();
       }
     },
     ready() {
       this._initScroll();
+      this._initPicsScroll();
     },
     methods: {
       _initScroll() {
@@ -83,6 +92,24 @@
           });
         } else {
           this.scroll.refresh();
+        }
+      },
+      _initPicsScroll() {
+        if (this.seller.pics) {
+          let picWidth = 120;
+          let margin = 6;
+          let width = (picWidth + margin) * this.seller.pics.length - margin;
+          this.$els.picList.style.width = width + 'px';
+          if (!this.picScroll) {
+            this.$nextTick(() => {
+              this.picScroll = new BScroll(this.$els.picWrapper, {
+                scrollX: true,
+                eventPassthrough: 'vertical'
+              });
+            });
+          } else {
+            this.picScroll.refresh();
+          }
         }
       }
     },
@@ -189,4 +216,24 @@
             font-size: 12px
             color: rgb(7, 17, 27)
             line-height: 16px
+    .pics
+      padding: 18px
+      .title
+        margin-bottom: 12px
+        font-size: 14px
+        color: rgb(7, 17, 27)
+        line-height: 14px
+      .pic-wrapper
+        width: 100%
+        overflow: hidden
+        white-space: nowrap
+        .pic-list
+          font-size: 0
+          .pic-item
+            display: inline-block
+            margin-right: 6px
+            width: 120px
+            height: 90px
+            &:last-child
+              margin: 0
 </style>
