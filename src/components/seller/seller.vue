@@ -55,6 +55,13 @@
           </ul>
         </div>
       </div>
+      <split></split>
+      <div class="info">
+        <h1 class="title border-1px">商家列表</h1>
+        <ul>
+          <li class="info-item border-1px" v-for="info in seller.infos">{{info}}</li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -139,7 +146,7 @@
       .desc
         padding-bottom: 18px
         font-size: 0
-        border-1px: 1px solid rgba(7, 17, 27, 0.1)
+        border-1px(rgba(7, 17, 27, 0.1))
         .star
           display: inline-block
           margin-right: 8px
@@ -236,4 +243,19 @@
             height: 90px
             &:last-child
               margin: 0
+    .info
+      padding: 18px 18px 10px 18px
+      color: rgb(7, 17, 27)
+      .title
+        padding-bottom: 12px
+        line-height: 14px
+        border-1px(rgba(7, 17, 27, 0.1))
+        font-size: 14px
+      .info-item
+        padding: 16px 12px
+        font-size: 12px
+        line-height: 16px
+        border-1px(rgba(7, 17, 27, 0.1))
+        &:last-child
+          border-none()
 </style>
