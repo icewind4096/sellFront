@@ -1,4 +1,4 @@
-<template>
+tab-item<template>
   <v-header :seller="seller"></v-header>
   <div>
     <div class="tab border-1px">
@@ -16,7 +16,7 @@
     </div>
   </div>
   <!-- 路由展示区 -->
-  <router-view :seller="seller"></router-view>
+  <router-view :seller="seller" keep-alive></router-view>
 </template>
 
 <script type="text/ecmascript-6">

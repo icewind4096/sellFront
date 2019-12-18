@@ -131,6 +131,10 @@ npm testfrom '../../components/cartControl/cartcontrol.vue';
     }
    ```
 #watch
-1. 用于观察变量状态变化   
-    
+1. 用于观察变量状态变化
+
+#localstorage  
+1. window.localStorage  
+   详见 store.js   
+
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

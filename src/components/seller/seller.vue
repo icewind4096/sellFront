@@ -74,6 +74,8 @@
   import split from '../../components/split/split';
   import star from '../../components/star/star.vue';
   import BScroll from 'better-scroll';
+  import {saveToLocal} from '../../common/js/store.js';
+  import {loadFromLoacl} from '../../common/js/store';
 
   export default {
     name: 'seller',
@@ -84,7 +86,9 @@
     },
     data() {
       return {
-        favorite: false
+        favorite: (() => {
+          this.loadFavorite();
+        })()
       };
     },
     computed: {
@@ -109,6 +113,13 @@
       toggleFavorite(event) {
         if (!event._constructed) { return; }
         this.favorite = !this.favorite;
+        this.saveFavorite(this.favorite);
+      },
+      saveFavorite() {
+        saveToLocal(this.seller.id, 'favorite', this.favorite);
+      },
+      loadFavorite() {
+        return loadFromLoacl(this.seller.id, 'favorite', false);
       },
       _initScroll() {
         if (!this.scroll) {
