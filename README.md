@@ -137,4 +137,15 @@ npm testfrom '../../components/cartControl/cartcontrol.vue';
 1. window.localStorage  
    详见 store.js   
 
+#项目打包  
+1. 运行npm run build  
+  执行package.json中的build部分
+    "scripts": {
+      "build": "node build/build.js",
+    }
+2. 会在当前项目下产生一个dist目录  
+  
+
+
+  
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
